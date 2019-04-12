@@ -26,5 +26,5 @@ class Song
     @@all << self
     self
   end
-#  binding.pry
+
 end
