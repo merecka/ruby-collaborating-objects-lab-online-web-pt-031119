@@ -11,7 +11,6 @@ class MP3Importer
 
   def files
     self.file_names = Dir.glob("*.mp3", base: self.path).select {|f| !File.directory? f}
-    binding.pry
   end
 
   def import

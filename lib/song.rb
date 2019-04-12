@@ -4,8 +4,11 @@ class Song
 
   attr_accessor :name, :artist, :file_name
 
+  @@all = []
+
   def initialize(name)
     @name = name
+
   end
 
   def self.new_by_filename(file_name)
@@ -15,14 +18,13 @@ class Song
     song_name = file_name_array[1].strip  #removes leading & trailing white spaces from song name
     new_song = self.new(song_name)
     new_song.artist = Artist.find_or_create_by_name(artist_name)
-  #  binding.pry
-    # artist = Artist.find_or_create_by_name(artist_name)
-    # artist.add_song(new_song)
-  #  binding.pry
-  #  binding.pry
-  #  new_song.artist.name = artist_name
-  #  Artist.find_or_create_by_name(artist_name)
-  #  binding.pry
+    new_song.artist.add_song(new_song)
+    new_song
+  end
+
+  def save
+    @@all << self
+    self
   end
 #  binding.pry
 end
