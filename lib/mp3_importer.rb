@@ -1,14 +1,25 @@
+require 'pry'
+
 class MP3Importer
 
-  attr_accessor :path
+  attr_accessor :path, :file_names
 
   def initialize(path)
     @path = path
+    @file_names = []
   end
 
   def files
-    Dir.entries(self.path).select {|f| !File.directory? f}
+    self.file_names = Dir.glob("*.mp3", base: self.path).select {|f| !File.directory? f}
   end
+
+  def import
+    self.files.each do |x|
+      Song.new_by_filename(x)
+    end
+  end
+
+
 
 
 end
